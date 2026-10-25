@@ -1,0 +1,33 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* SHIELD Executive Brand Overrides */
+.page-header {
+  background-image: linear-gradient(120deg, #1c1917, #121212) !important;
+  color: #e0e0e0 !important;
+}
+
+body {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #d4af37 !important;
+}
+
+a {
+  color: #d4af37 !important;
+}
+
+.main-content blockquote {
+  border-left-color: #c23b22 !important;
+  color: #e0e0e0 !important;
+  background-color: #1a1a1a !important;
+}
+
+.main-content {
+  color: #e0e0e0 !important;
+}
