@@ -6,7 +6,7 @@
 ### 📌 Current Briefing (Reporting Window: Oct 17 – Oct 24, 2026)
 Welcome to this week's peer-to-peer intelligence briefing. This week covers the $270M FinCEN student aid enforcement shift, SDNY counterfeit deposit indictments, BioCatch mid-market mule trends, and OFAC/crypto compliance updates.
 
-📥 **[Download This Week's Full Styled Dossier (.docx)](archive/SHIELD_Weekly_Briefing_2026-10-25.docx)**
+📥 **[Download This Week's SHIELD Dossier (.docx)](archive/SHIELD_Weekly_Briefing_2026-10-25.docx)**
 
 ---
 
