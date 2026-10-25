@@ -1,21 +1,3 @@
-<style>
-  /* SHIELD Executive Brand Palette Styling */
-  body {
-    color: #e0e0e0 !important;
-    background-color: #121212 !important;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: #d4af37 !important; /* Metallic Gold headers */
-  }
-  a {
-    color: #d4af37 !important; /* Gold links */
-  }
-  blockquote {
-    border-left-color: #c23b22 !important; /* Crimson Red accent border */
-    color: #e0e0e0 !important;
-  }
-</style>
-
 # 🛡️ SHIELD: The 314 Collective
 > **Curated Weekly Intelligence Dossier for Community Banks, Credit Unions, Fintechs, Fraud, BSA/AML, Audit & GRC Practitioners**
 
