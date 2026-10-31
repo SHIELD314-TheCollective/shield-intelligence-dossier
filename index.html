@@ -1,974 +1,375 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#0F172A] text-slate-100 dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SHIELD: The 314 Collective | Weekly Intelligence Briefing</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts: Inter & Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: '#1C1917',
-            terracotta: '#C2410C',
-            midnight: '#1E293B',
-            cabernet: '#4A1521',
-            sage: '#84A98C',
-            linen: '#F5F5F0',
-            shieldGold: '#D97706',
-            shieldRed: '#EF4444',
-            shieldGreen: '#10B981',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            heading: ['Montserrat', 'sans-serif'],
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIELD: The 314 Collective | Weekly Intelligence Dossier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #1C1917;
+            --linen: #F5F5F0;
+            --terracotta: #C2410C;
+            --navy: #1E293B;
+            --cabernet: #4A1521;
+            --sage: #84A98C;
+            --teal: #55B6B6;
+            --card-bg: #221F1D;
+            --border-color: rgba(245, 245, 240, 0.12);
         }
-      }
-    }
-  </script>
 
-  <style>
-    /* Custom scrollbars & smooth transitions */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0F172A;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #C2410C;
-    }
-    .gradient-border-b {
-      border-bottom: 2px solid;
-      border-image: linear-gradient(to right, #C2410C, #D97706, #10B981) 1;
-    }
-    @media print {
-      .no-print { display: none !important; }
-      body { background: white !important; color: black !important; }
-      .print-full { width: 100% !important; max-width: 100% !important; padding: 0 !important; }
-      .card-print { border: 1px solid #ccc !important; background: white !important; color: black !important; }
-    }
-  </style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--obsidian);
+            color: var(--linen);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 2px solid var(--terracotta);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-titles h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--linen);
+            display: flex;
+            align-items: center;
+            gap: 0.5srem;
+        }
+
+        .header-titles p {
+            font-size: 0.95rem;
+            color: var(--sage);
+            margin-top: 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn {
+            background-color: var(--navy);
+            color: var(--linen);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn:hover {
+            border-color: var(--terracotta);
+            background-color: #26334a;
+        }
+
+        .btn-primary {
+            background-color: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        .btn-primary:hover {
+            background-color: #a33509;
+        }
+
+        /* Filter Controls */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--linen);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--teal);
+            border-left: 3px solid var(--terracotta);
+            padding-left: 0.75rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* TL;DR Cards */
+        .tldr-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media(min-width: 768px) {
+            .tldr-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(194, 65, 12, 0.4);
+        }
+
+        .card-tag {
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            color: var(--linen);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #d1d5db;
+        }
+
+        /* Signals Accordion */
+        .signal-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .signal-header {
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background-color: rgba(30, 41, 59, 0.4);
+        }
+
+        .signal-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .signal-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--sage);
+        }
+
+        .signal-body {
+            padding: 1.25rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .signal-field {
+            margin-bottom: 0.8rem;
+        }
+
+        .signal-field strong {
+            color: var(--teal);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Red Flags Table */
+        .queue-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .queue-table th, .queue-table td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .queue-table th {
+            background-color: var(--navy);
+            color: var(--sage);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .queue-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Links */
+        a.external-link {
+            color: var(--teal);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        a.external-link:hover {
+            color: var(--terracotta);
+        }
+
+        /* Archive Modal */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--linen);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .archive-list {
+            list-style: none;
+        }
+
+        .archive-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .archive-list li:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
 </head>
+<body>
 
-<body class="h-full flex flex-col font-sans bg-[#0B0F19] text-slate-200 antialiased selection:bg-terracotta selection:text-white">
-
-  <!-- TOP HEADER & BRANDING BAR -->
-  <header class="no-print sticky top-0 z-50 bg-[#0F172A]/95 backdrop-blur-md border-b border-slate-800 shadow-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        
-        <!-- Brand Title & Tagline -->
-        <div class="flex items-center space-x-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-terracotta via-shieldGold to-amber-600 flex items-center justify-center shadow-lg shadow-terracotta/20 ring-1 ring-white/20">
-            <i class="fa-solid font-bold text-xl text-white">🛡️</i>
-          </div>
-          <div>
-            <div class="flex items-center space-x-2">
-              <span class="font-heading font-extrabold text-xl tracking-wider text-white">SHIELD</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-terracotta/20 text-terracotta border border-terracotta/30">THE 314 COLLECTIVE</span>
-            </div>
-            <p class="text-xs text-slate-400 font-medium hidden sm:block">Architect of Human-Centered Risk Management & Operational Intelligence</p>
-          </div>
+<div class="container">
+    <header>
+        <div class="header-titles">
+            <h1>🛡️ SHIELD: The 314 Collective</h1>
+            <p>Reporting Window: Oct 25 – Oct 30, 2026 | Issued: Oct 30, 2026</p>
         </div>
-
-        <!-- Metadata & Actions -->
-        <div class="flex items-center space-x-3">
-          <div class="hidden md:flex flex-col text-right mr-3">
-            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Reporting Window</span>
-            <span class="text-sm font-bold text-amber-400">Oct 25 – Oct 30, 2026</span>
-          </div>
-
-          <button onclick="toggleArchiveModal()" class="px-3.5 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold flex items-center space-x-2 border border-amber-500/30 transition">
-            <i class="fa-solid fa-box-archive text-amber-400"></i>
-            <span class="hidden sm:inline">Dossier Archive</span>
-          </button>
-
-          <button onclick="window.print()" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center space-x-2 border border-slate-700 transition">
-            <i class="fa-solid fa-print text-terracotta"></i>
-            <span class="hidden sm:inline">Export / Print</span>
-          </button>
-
-          <a href="https://github.com/SHIELD314-TheCollective/shield-intelligence-dossier" target="_blank" class="px-3.5 py-2 rounded-lg bg-terracotta/90 hover:bg-terracotta text-white text-xs font-bold flex items-center space-x-2 shadow-lg shadow-terracotta/20 transition">
-            <i class="fa-brands fa-github"></i>
-            <span class="hidden sm:inline">GitHub Hub</span>
-          </a>
+        <div class="header-actions">
+            <button class="btn" onclick="toggleArchiveModal()">📚 Dossier Archive</button>
+            <a href="SHIELD_Weekly_Briefing_2026-10-30.docx" class="btn btn-primary" download>📥 Download .docx</a>
         </div>
-      </div>
-    </div>
-    <div class="h-0.5 w-full bg-gradient-to-r from-terracotta via-amber-500 to-emerald-500"></div>
-  </header>
+    </header>
 
-  <!-- NAVIGATION TABS -->
-  <nav class="no-print bg-[#131B2E] border-b border-slate-800/80 sticky top-[81px] z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex space-x-1 sm:space-x-4 overflow-x-auto py-2.5 no-scrollbar text-xs font-semibold">
-        <button onclick="switchTab('tldr')" id="tab-tldr" class="tab-btn active px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition bg-terracotta text-white shadow-md">
-          <i class="fa-solid fa-bolt"></i>
-          <span>1. Weekly TL;DR</span>
-        </button>
-        <button onclick="switchTab('signals')" id="tab-signals" class="tab-btn px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition text-slate-400 hover:text-white hover:bg-slate-800">
-          <i class="fa-solid fa-magnifying-glass font-bold"></i>
-          <span>2. Signals & Typologies</span>
-        </button>
-        <button onclick="switchTab('redflags')" id="tab-redflags" class="tab-btn px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition text-slate-400 hover:text-white hover:bg-slate-800">
-          <i class="fa-solid fa-flag text-rose-500"></i>
-          <span>3. Frontline Red Flags</span>
-        </button>
-        <button onclick="switchTab('aftercare')" id="tab-aftercare" class="tab-btn px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition text-slate-400 hover:text-white hover:bg-slate-800">
-          <i class="fa-solid fa-handshake-angle text-emerald-400"></i>
-          <span>4. Human Risk & Aftercare</span>
-        </button>
-        <button onclick="switchTab('research')" id="tab-research" class="tab-btn px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition text-slate-400 hover:text-white hover:bg-slate-800">
-          <i class="fa-solid fa-book-bookmark text-amber-400"></i>
-          <span>5. Curated Research</span>
-        </button>
-        <button onclick="switchTab('disclaimer')" id="tab-disclaimer" class="tab-btn px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition text-slate-400 hover:text-white hover:bg-slate-800">
-          <i class="fa-solid fa-clipboard-list text-slate-400"></i>
-          <span>6. Scope & Disclaimer</span>
-        </button>
-        <button onclick="toggleArchiveModal()" class="tab-btn px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition text-amber-400/90 hover:text-amber-300 hover:bg-amber-500/10 border border-amber-500/20">
-          <i class="fa-solid fa-box-archive"></i>
-          <span>7. Archive & Past Drops</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- MAIN BRIEFING CONTENT CONTAINER -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-    <!-- SUB-HEADER SUMMARY BAR -->
-    <div class="mb-8 p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-[#1A2238] to-slate-900 border border-slate-800 shadow-xl relative overflow-hidden">
-      <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-terracotta/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div class="flex items-center space-x-2 mb-1">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Operational Intelligence Dispatch</span>
-          </div>
-          <h1 class="font-heading text-2xl sm:text-3xl font-extrabold text-white tracking-tight">SHIELD Weekly Intelligence Briefing</h1>
-          <p class="text-sm text-slate-400 mt-1">Curated For: Community Banks, Credit Unions, Fintechs, Fraud, BSA/AML, Audit & GRC Practitioners</p>
-        </div>
-        <div class="flex items-center space-x-4 bg-slate-950/60 p-3 rounded-xl border border-slate-800/80 text-xs">
-          <div>
-            <span class="text-slate-500 block">Issued Date</span>
-            <span class="font-semibold text-slate-200">Oct 30, 2026</span>
-          </div>
-          <div class="h-6 w-px bg-slate-800"></div>
-          <div>
-            <span class="text-slate-500 block">Primary Focus</span>
-            <span class="font-semibold text-terracotta">Crypto Sweeps & DPRK FaaS</span>
-          </div>
-        </div>
-      </div>
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterContent('all')">All Signals</button>
+        <button class="filter-btn" onclick="filterContent('crypto')">Crypto & Sanctions</button>
+        <button class="filter-btn" onclick="filterContent('identity')">Synthetic / Identity</button>
+        <button class="filter-btn" onclick="filterContent('fraud')">Wire & BEC Fraud</button>
+        <button class="filter-btn" onclick="filterContent('reg')">Regulatory & BOI</button>
     </div>
 
-    <!-- SECTION 1: WEEKLY SIGNAL TL;DR -->
-    <section id="sec-tldr" class="tab-content block space-y-6">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center space-x-3">
-          <div class="p-2 rounded-lg bg-terracotta/20 text-terracotta">
-            <i class="fa-solid fa-bolt text-lg"></i>
-          </div>
-          <div>
-            <h2 class="font-heading text-xl font-bold text-white">1. Weekly Signal TL;DR</h2>
-            <p class="text-xs text-slate-400">High-priority operational developments and frontline reads for immediate action</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- CARD 1: ENFORCEMENT SHIFT -->
-        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 p-6 flex flex-col justify-between hover:border-terracotta/40 transition shadow-lg group">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1.5">
-                <i class="fa-solid fa-gavel text-[10px]"></i> ENFORCEMENT SHIFT
-              </span>
-              <span class="text-xs text-slate-500">Oct 28, 2026</span>
-            </div>
-            <h3 class="font-heading font-bold text-lg text-white group-hover:text-amber-400 transition mb-3">
-              OFAC Sanctions DPRK IT Worker Fraud Laundering Network
-            </h3>
-            <p class="text-sm text-slate-300 leading-relaxed mb-4">
-              OFAC sanctioned 10 individuals and 1 entity behind North Korean IT worker fraud, including two Russian nationals who converted crypto to cash—the first OFAC designations of Russian citizens for laundering DPRK IT worker earnings. Scheme relies on stolen/fabricated identities, remote U.S. firm jobs, and stablecoin payments masked as payroll.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-slate-800/80 space-y-2">
-            <div class="flex items-start space-x-2 text-xs">
-              <span class="font-bold text-amber-400 whitespace-nowrap">Our Read:</span>
-              <span class="text-slate-300">This is an identity fraud & account onboarding problem as much as a sanctions risk.</span>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-200">
-              <span class="font-bold text-emerald-400 block mb-0.5"><i class="fa-solid fa-circle-check mr-1"></i> Operational Takeaway:</span>
-              Audit new deposit accounts & direct-deposit changes for remote-worker profiles. Screen internal remote IT hires.
-            </div>
-            <div class="pt-2 flex items-center justify-between text-xs">
-              <span class="text-slate-500">Primary Source:</span>
-              <a href="https://home.treasury.gov/policy-issues/financial-sanctions/recent-actions" target="_blank" rel="noopener noreferrer" class="text-terracotta hover:underline font-semibold flex items-center gap-1">
-                U.S. Treasury OFAC Release <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 2: OPERATIONAL VECTOR -->
-        <div class="rounded-2xl bg-slate-900/90 border border-slate-800 p-6 flex flex-col justify-between hover:border-terracotta/40 transition shadow-lg group">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center gap-1.5">
-                <i class="fa-solid fa-triangle-exclamation text-[10px]"></i> OPERATIONAL VECTOR
-              </span>
-              <span class="text-xs text-slate-500">Oct 29, 2026</span>
-            </div>
-            <h3 class="font-heading font-bold text-lg text-white group-hover:text-rose-400 transition mb-3">
-              Record $6.3B Binance Hot Wallet Exploit Drained in 20 Mins
-            </h3>
-            <p class="text-sm text-slate-300 leading-relaxed mb-4">
-              Largest crypto theft on record hit Binance, draining ~$6.3B across 10 blockchains via compromised transaction-signing infrastructure. TRM & Chainalysis attribute to DPRK's TraderTraitor unit. Stablecoin issuers froze ~$2.7B–$3B within 24 hours, leaving billions un-freezable.
-            </p>
-          </div>
-          <div class="pt-4 border-t border-slate-800/80 space-y-2">
-            <div class="flex items-start space-x-2 text-xs">
-              <span class="font-bold text-rose-400 whitespace-nowrap">Our Read:</span>
-              <span class="text-slate-300">Crypto event on-chain, but the cash-out run will crash directly into fiat bank account rails.</span>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-xs text-slate-200">
-              <span class="font-bold text-emerald-400 block mb-0.5"><i class="fa-solid fa-circle-check mr-1"></i> Operational Takeaway:</span>
-              Watch fiat OTC/exchange off-ramps, wallet-exposure triggers, and a wave of secondary "recovery service" scams.
-            </div>
-            <div class="pt-2 flex items-center justify-between text-xs">
-              <span class="text-slate-500">Primary Source:</span>
-              <a href="https://thehackernews.com" target="_blank" rel="noopener noreferrer" class="text-terracotta hover:underline font-semibold flex items-center gap-1">
-                TRM & Chainalysis Incident Breakdown <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 2: TOP SIGNALS & TYPOLOGY BREAKDOWN -->
-    <section id="sec-signals" class="tab-content hidden space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-3">
-        <div class="flex items-center space-x-3">
-          <div class="p-2 rounded-lg bg-shieldGold/20 text-shieldGold">
-            <i class="fa-solid fa-magnifying-glass text-lg"></i>
-          </div>
-          <div>
-            <h2 class="font-heading text-xl font-bold text-white">2. Top Signals & Typology Breakdown</h2>
-            <p class="text-xs text-slate-400">Deep-dive analysis on active threats, mechanics, pivot keys, and frontline impacts</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- SIGNALS ACCORDION CONTAINER -->
-      <div class="space-y-4">
-
-        <!-- SIGNAL 1 -->
-        <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-lg">
-          <button onclick="toggleAccordion('sig1')" class="w-full p-5 text-left flex items-center justify-between bg-slate-900 hover:bg-slate-800/60 transition">
-            <div class="flex items-center space-x-4">
-              <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-400 font-mono text-xs font-bold border border-rose-500/30">SIGNAL 1 OF 4</span>
-              <div>
-                <h3 class="font-heading font-bold text-base text-white">Binance Hot Wallet Theft: Stolen-Funds Laundering Reaching Fiat Rails</h3>
-                <span class="text-xs text-slate-400">Core Domain: Crypto Off-ramps | Sanctions (DPRK) | Stablecoin Freezes</span>
-              </div>
-            </div>
-            <i id="icon-sig1" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-          </button>
-          
-          <div id="content-sig1" class="hidden p-6 border-t border-slate-800 bg-slate-950/40 space-y-4 text-xs sm:text-sm text-slate-300">
-            <div>
-              <h4 class="font-bold text-amber-400 uppercase tracking-wider text-xs mb-1">Mechanism & Vector</h4>
-              <p class="leading-relaxed">
-                Per TRM Labs, attack began ~20:05 UTC Oct 29. Attackers compromised Binance's hot wallet transaction-signing infrastructure. On Ethereum, a single transaction carrying 50 pre-signed authorizations turned a hot wallet into a sweeper, siphoning ~$6.36B in 20 minutes. Early findings point to a compromised DevOps engineer's laptop. Attacker funded operator wallet via small Tornado Cash withdrawals and executed large swaps via market makers and DeFi lending (avoiding bridge-heavy patterns seen in Bybit). Stablecoin issuers (Tether, Circle, Ripple, WLF) froze ~$2.67B–$3B, leaving ~$2.4B–$3.3B un-freezable. TRM/Chainalysis attribute to DPRK's TraderTraitor with high confidence.
-              </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-terracotta text-xs uppercase mb-2"><i class="fa-solid fa-key mr-1"></i> Pivot Keys</h4>
-                <ul class="list-disc list-inside space-y-1 text-slate-300">
-                  <li>Ethereum Address: <code class="bg-slate-950 px-1.5 py-0.5 rounded text-amber-300 font-mono text-xs">0x15104a9ce0f08a8f0075a0869ae80e795fe0feb7</code> (Shared with Bitget exploit)</li>
-                  <li>Tornado Cash-funded operator wallets</li>
-                  <li>Large DEX swaps through market makers</li>
-                  <li>Stablecoin balances held &lt;1 hour before conversion</li>
-                </ul>
-              </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-emerald-400 text-xs uppercase mb-2"><i class="fa-solid fa-shield-halved mr-1"></i> Frontline Impact</h4>
-            <div class="text-xs text-slate-500 italic flex items-center justify-between">
-              <span>Source: TRM Labs, Chainalysis, Elliptic, The Hacker News (Oct 29–30, 2026).</span>
-              <a href="https://www.trmlabs.com/blog" target="_blank" rel="noopener noreferrer" class="text-sage hover:underline font-semibold flex items-center gap-1">
-                Explore TRM On-Chain Data <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- SIGNAL 2 -->
-        <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-lg">
-          <button onclick="toggleAccordion('sig2')" class="w-full p-5 text-left flex items-center justify-between bg-slate-900 hover:bg-slate-800/60 transition">
-            <div class="flex items-center space-x-4">
-              <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 font-mono text-xs font-bold border border-amber-500/30">SIGNAL 2 OF 4</span>
-              <div>
-                <h3 class="font-heading font-bold text-base text-white">North Korean IT Workers: Stolen IDs, Payroll Stablecoins & Laptop Farms</h3>
-                <span class="text-xs text-slate-400">Core Domain: Synthetic/Stolen Identity | Deposit Accounts | AI Deception | Sanctions</span>
-              </div>
-            </div>
-            <i id="icon-sig2" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-          </button>
-          
-          <div id="content-sig2" class="hidden p-6 border-t border-slate-800 bg-slate-950/40 space-y-4 text-xs sm:text-sm text-slate-300">
-            <div>
-              <h4 class="font-bold text-amber-400 uppercase tracking-wider text-xs mb-1">Mechanism & Vector</h4>
-              <p class="leading-relaxed">
-                OFAC designated Russian nationals (Ilya Boykov, Vitold Obertas), DPRK managers, and front company FFTDC. DPRK workers gain remote U.S. IT jobs using stolen/synthetic identities via front companies (Alis, Amnokgang). Income arrives as recurring stablecoin payroll flows, converts to ETH, consolidates into SDN-linked addresses, and cashes out via Garantex. Facilitators maintain U.S. "laptop farms" to spoof domestic IP footprints and use GenAI / deepfakes during hiring interviews.
-              </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-terracotta text-xs uppercase mb-2"><i class="fa-solid fa-key mr-1"></i> Pivot Keys</h4>
-                <ul class="list-disc list-inside space-y-1 text-slate-300">
-                  <li>Front Companies: Alis, Amnokgang, FFTDC</li>
-                  <li>Residential addresses receiving multiple company laptops</li>
-                  <li>Payroll-like recurring credits followed by same-day conversion</li>
-                  <li>VPN/Proxy logins conflicting with physical residence</li>
-                </ul>
-              </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-emerald-400 text-xs uppercase mb-2"><i class="fa-solid fa-shield-halved mr-1"></i> Frontline Impact</h4>
-            <div class="text-xs text-slate-500 italic flex items-center justify-between">
-              <span>Source: U.S. Treasury / OFAC, Chainalysis, Tech Times (Oct 28–29, 2026).</span>
-              <a href="https://blog.chainalysis.com" target="_blank" rel="noopener noreferrer" class="text-sage hover:underline font-semibold flex items-center gap-1">
-                Read Chainalysis DPRK Report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- SIGNAL 3 -->
-        <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-lg">
-          <button onclick="toggleAccordion('sig3')" class="w-full p-5 text-left flex items-center justify-between bg-slate-900 hover:bg-slate-800/60 transition">
-            <div class="flex items-center space-x-4">
-              <span class="px-2.5 py-1 rounded bg-blue-500/20 text-blue-400 font-mono text-xs font-bold border border-blue-500/30">SIGNAL 3 OF 4</span>
-              <div>
-                <h3 class="font-heading font-bold text-base text-white">Romance & BEC Wire Networks: Victims Weaponized as Mule Conduits</h3>
-                <span class="text-xs text-slate-400">Core Domain: Wire Fraud | BEC | Mule Accounts | Elder Exploitation</span>
-              </div>
-            </div>
-            <i id="icon-sig3" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-          </button>
-          
-          <div id="content-sig3" class="hidden p-6 border-t border-slate-800 bg-slate-950/40 space-y-4 text-xs sm:text-sm text-slate-300">
-            <div>
-              <h4 class="font-bold text-amber-400 uppercase tracking-wider text-xs mb-1">Mechanism & Vector</h4>
-              <p class="leading-relaxed">
-                SDNY announced guilty pleas for Isaac Oduro Boateng ("Kofi Boat") and Inusah Ahmed ("Pascal") for leading a $100M+ international fraud/BEC ring based in Ghana. The enterprise cultivated online romance victims (primarily older adults) and manipulated them into receiving and forwarding stolen BEC funds to West Africa, unknowingly acting as money mules.
-              </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-terracotta text-xs uppercase mb-2"><i class="fa-solid fa-key mr-1"></i> Pivot Keys</h4>
-                <ul class="list-disc list-inside space-y-1 text-slate-300">
-                  <li>First-time international wires from senior/retiree accounts</li>
-                  <li>Newly added business beneficiaries following email modification</li>
-                  <li>Inbound third-party credit immediately followed by outbound wire</li>
-                </ul>
-              </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-emerald-400 text-xs uppercase mb-2"><i class="fa-solid fa-shield-halved mr-1"></i> Frontline Impact</h4>
-            <div class="text-xs text-slate-500 italic flex items-center justify-between">
-              <span>Source: DOJ SDNY, FinCEN Alert FIN-2026-Alert005 (Oct 29, 2026).</span>
-              <a href="https://www.justice.gov/usao-sdny/pr" target="_blank" rel="noopener noreferrer" class="text-sage hover:underline font-semibold flex items-center gap-1">
-                View SDNY Court Press Release <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- SIGNAL 4 -->
-        <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-lg">
-          <button onclick="toggleAccordion('sig4')" class="w-full p-5 text-left flex items-center justify-between bg-slate-900 hover:bg-slate-800/60 transition">
-            <div class="flex items-center space-x-4">
-              <span class="px-2.5 py-1 rounded bg-purple-500/20 text-purple-400 font-mono text-xs font-bold border border-purple-500/30">SIGNAL 4 OF 4</span>
-              <div>
-                <h3 class="font-heading font-bold text-base text-white">Thinner BOI Data vs. Persistent Shell Company Money Laundering</h3>
-                <span class="text-xs text-slate-400">Core Domain: Corporate Registries | Business CDD | Shell Companies</span>
-              </div>
-            </div>
-            <i id="icon-sig4" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-          </button>
-          
-          <div id="content-sig4" class="hidden p-6 border-t border-slate-800 bg-slate-950/40 space-y-4 text-xs sm:text-sm text-slate-300">
-            <div>
-              <h4 class="font-bold text-amber-400 uppercase tracking-wider text-xs mb-1">Mechanism & Vector</h4>
-              <p class="leading-relaxed">
-                FinCEN's final rule permanently exempted U.S. domestic entities from Corporate Transparency Act (CTA) reporting, reducing reporting entities from 32.5M to ~28K foreign firms (with 15M records slated for deletion by Feb 2027). 21 state AGs have sued in Oregon federal court to block this deletion. Concurrently, DOJ sentenced Shu Jun Zhen (9 years, $23M forfeiture) for laundering $92M+ via bulk cash in shell company bank accounts using synthetic IDs.
-              </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-terracotta text-xs uppercase mb-2"><i class="fa-solid fa-key mr-1"></i> Pivot Keys</h4>
-                <ul class="list-disc list-inside space-y-1 text-slate-300">
-                  <li>Registered agents/addresses shared across unrelated business applicants</li>
-                  <li>Formation dates within days/weeks of account application</li>
-                  <li>Repeating signers across multiple distinct business entities</li>
-                </ul>
-              </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800">
-                <h4 class="font-bold text-emerald-400 text-xs uppercase mb-2"><i class="fa-solid fa-shield-halved mr-1"></i> Frontline Impact</h4>
-            <div class="text-xs text-slate-500 italic flex items-center justify-between">
-              <span>Source: InvestmentNews, State of Oregon v. Bessent, DOJ Enforcement Digest (Oct 2026).</span>
-              <a href="https://www.fincen.gov/news/news-releases" target="_blank" rel="noopener noreferrer" class="text-sage hover:underline font-semibold flex items-center gap-1">
-                Check FinCEN Registry Actions <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- WATCH LIST ITEMS -->
-      <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-        <h3 class="font-heading font-bold text-sm text-slate-200 uppercase tracking-wider flex items-center gap-2">
-          <i class="fa-solid fa-eye text-amber-400"></i> Watch List (Below Threshold Signals)
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="font-bold text-amber-400 block">FTC Impersonation Sweep (Oct 29)</span>
-            19 fake FTC domains taken down; $80M+ recovered under Impersonation Rule. Scammers using search ad-optimization tools to push fake agency contacts.
-          </div>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="font-bold text-amber-400 block">SEC Crypto Signals Case (Oct 29)</span>
-            SEC charged BG Wealth Sharing & DSJ Exchange ($130M fraud) using fake SEC seal certificates to trick investors.
-          </div>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="font-bold text-amber-400 block">Veteran ATO & Mule Remittances (Oct 20)</span>
-            DOJ plea (Boling Jr.) revealed stolen military ID data used to breach bank accounts and remit funds to the Philippines.
-          </div>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="font-bold text-amber-400 block">Community Bank Stablecoins (Oct 26)</span>
-            OCC Bulletin 2026-50 encourages community banks to explore payment stablecoin issuance under the GENIUS Act.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: FRONTLINE RED FLAGS & QUEUE INDICATORS -->
-    <section id="sec-redflags" class="tab-content hidden space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-3">
-        <div class="flex items-center space-x-3">
-          <div class="p-2 rounded-lg bg-rose-500/20 text-rose-500">
-            <i class="fa-solid fa-flag text-lg"></i>
-          </div>
-          <div>
-            <h2 class="font-heading text-xl font-bold text-white">3. Frontline Red Flags & Queue Indicators</h2>
-            <p class="text-xs text-slate-400">Filter operational indicators across banking and compliance workflows</p>
-          </div>
-        </div>
-
-        <!-- SEARCH INPUT -->
-        <div class="relative w-full md:w-72">
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-          <input type="text" id="flagSearch" onkeyup="filterFlags()" placeholder="Search flags (e.g., wire, mule, IDV)..." 
-                 class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-terracotta">
-        </div>
-      </div>
-
-      <!-- RED FLAGS GRID -->
-      <div id="flagsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-
-        <!-- QUEUE ITEM 1 -->
-        <div class="flag-card p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 font-semibold text-xs border border-amber-500/20">
-              <i class="fa-solid fa-landmark mr-1"></i> Branch / Teller Line
-            </span>
-            <button onclick="copyText('flag-1')" class="text-xs text-slate-500 hover:text-terracotta transition"><i class="fa-regular fa-copy"></i> Copy</button>
-          </div>
-          <ul id="flag-1" class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-            <li>Retiree requesting first-time international wire mentioning an online acquaintance or "helping a friend".</li>
-            <li>Customer on an active call during transaction, or coached to withhold transfer details from family.</li>
-            <li>Customer inquiring about frozen exchange balances or claiming a "recovery agent" called after a crypto loss.</li>
-          </ul>
-        </div>
-
-        <!-- QUEUE ITEM 2 -->
-        <div class="flag-card p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 font-semibold text-xs border border-blue-500/20">
-              <i class="fa-solid fa-user-plus mr-1"></i> New Accounts / Onboarding
-            </span>
-            <button onclick="copyText('flag-2')" class="text-xs text-slate-500 hover:text-terracotta transition"><i class="fa-regular fa-copy"></i> Copy</button>
-          </div>
-          <ul id="flag-2" class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-            <li>Remote-worker profile: Out-of-area address, direct deposits from multiple staffing firms, unresolvable employer.</li>
-            <li>Business applicants sharing registered agents/addresses with unrelated entities or formed within days of applying.</li>
-            <li>Shell company applicants expecting high-volume cash deposits inconsistent with declared line of business.</li>
-          </ul>
-        </div>
-
-        <!-- QUEUE ITEM 3 -->
-        <div class="flag-card p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 font-semibold text-xs border border-purple-500/20">
-              <i class="fa-solid fa-id-card mr-1"></i> Digital Onboarding / IDV
-            </span>
-            <button onclick="copyText('flag-3')" class="text-xs text-slate-500 hover:text-terracotta transition"><i class="fa-regular fa-copy"></i> Copy</button>
-          </div>
-          <ul id="flag-3" class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-            <li>ID photo and selfie discrepancy in apparent age/sex, or overly smoothed/blended facial biometrics.</li>
-            <li>Multiple applications from single device/IP address using distinct identity documents.</li>
-            <li>Vendor flags for virtual cameras, emulators, hooked applications, or proxy/VPN location spoofing.</li>
-          </ul>
-        </div>
-
-        <!-- QUEUE ITEM 4 -->
-        <div class="flag-card p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold text-xs border border-emerald-500/20">
-              <i class="fa-solid fa-money-bill-transfer mr-1"></i> Deposit Ops / ACH / Wire
-            </span>
-            <button onclick="copyText('flag-4')" class="text-xs text-slate-500 hover:text-terracotta transition"><i class="fa-regular fa-copy"></i> Copy</button>
-          </div>
-          <ul id="flag-4" class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-            <li>BEC Typology: New beneficiary or modified payment instructions immediately following email change request.</li>
-            <li>Payroll-like recurring credits from crypto exchanges/off-ramps followed by immediate same-day outbound transfers.</li>
-            <li>Third-party credits to senior citizen accounts followed by immediate outbound wires to unfamiliar payees.</li>
-          </ul>
-        </div>
-
-        <!-- QUEUE ITEM 5 -->
-        <div class="flag-card p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 font-semibold text-xs border border-rose-500/20">
-              <i class="fa-solid fa-laptop-code mr-1"></i> Online Banking / TM Rules
-            </span>
-            <button onclick="copyText('flag-5')" class="text-xs text-slate-500 hover:text-terracotta transition"><i class="fa-regular fa-copy"></i> Copy</button>
-          </div>
-          <ul id="flag-5" class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-            <li>Sudden funding of new OTC desks following public exchange exploit news or hits on public wallet lists.</li>
-            <li>Outbound transfer within 24 hours of new device registration with remote access tool (RAT) active.</li>
-            <li>Account takeover followed by immediate remittance bursts to overseas corridors (e.g., Philippines).</li>
-          </ul>
-        </div>
-
-        <!-- QUEUE ITEM 6 -->
-        <div class="flag-card p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-2.5 py-1 rounded-md bg-teal-500/10 text-teal-400 font-semibold text-xs border border-teal-500/20">
-              <i class="fa-solid fa-shield-cat mr-1"></i> BSA / SAR / Sanctions
-            </span>
-            <button onclick="copyText('flag-6')" class="text-xs text-slate-500 hover:text-terracotta transition"><i class="fa-regular fa-copy"></i> Copy</button>
-          </div>
-          <ul id="flag-6" class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-            <li>Direct/indirect exposure to Garantex-linked addresses or designated Iranian shadow fleet entities.</li>
-            <li>Funds transfers to unhosted wallets or OTC brokers lacking documented business rationale.</li>
-            <li>Business SAR narratives: explicitly detail state registry checks performed to offset CTA database gaps.</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 4: HUMAN RISK & AFTERCARE -->
-    <section id="sec-aftercare" class="tab-content hidden space-y-6">
-      <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
-        <div class="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
-          <i class="fa-solid fa-handshake-angle text-lg"></i>
-        </div>
-        <div>
-          <h2 class="font-heading text-xl font-bold text-white">4. Aftercare & Human Risk Protocol</h2>
-          <p class="text-xs text-slate-400">Human-stack risk management, victim care, and operational boundary protocols</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- AFTERCARE CARD 1 -->
-        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="flex items-center space-x-3 text-amber-400 font-bold text-sm">
-            <i class="fa-solid fa-[#0F172A] fa-comment-slash"></i>
-            <span>Mastering SAR Confidentiality Boundary Rules</span>
-          </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Per the Sept 2 Interagency Joint Statement: Staff **MAY** discuss underlying transaction facts (dates, amounts, parties), inform customers that delays/closures relate to suspected fraud, ask source-of-funds questions, and issue mule warnings. Staff **MAY NOT** reveal that a SAR was filed or exists.
-          </p>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-emerald-400 font-mono">
-            💡 Operational Fix: Print permissible communication parameters on index cards for front-desk tellers.
-          </div>
-        </div>
-
-        <!-- AFTERCARE CARD 2 -->
-        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="flex items-center space-x-3 text-terracotta font-bold text-sm">
-            <i class="fa-solid fa-heart-crack"></i>
-            <span>Victim-Mule Protocol & Non-Punitive Intake</span>
-          </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            In complex romance/BEC cases, victims are frequently exploited to move funds stolen from other victims. Treat them as victims first: preserve full chat logs, collect recruiter handles, and explain legal exposure neutrally without issuing aggressive threats at the desk.
-          </p>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-slate-300">
-            <span class="font-bold text-terracotta">Fact-Finding Tone:</span> Keep interviews objective to secure recruiter telegram/WhatsApp handles before closing accounts.
-          </div>
-        </div>
-
-        <!-- AFTERCARE CARD 3 -->
-        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="flex items-center space-x-3 text-blue-400 font-bold text-sm">
-            <i class="fa-solid fa-door-lock"></i>
-            <span>Closing the Re-Victimization Door</span>
-          </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Proactively warn scam victims that neither the bank, FBI, nor FTC will EVER reach out via Telegram/WhatsApp or request upfront fees to "recover" lost crypto or wired funds. Explicitly add "recovery services" to intake scripts.
-          </p>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-blue-400">
-            Ref: FBI PSA I-072026-PSA & FTC Imposter Warning Releases (Oct 2026).
-          </div>
-        </div>
-
-        <!-- AFTERCARE CARD 4 -->
-        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-          <div class="flex items-center space-x-3 text-purple-400 font-bold text-sm">
-            <i class="fa-solid fa-users-shield"></i>
-            <span>Frontline Staff Peer Support & Debriefs</span>
-          </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Tellers and dispute handlers processing transactions later revealed as major scams often carry heavy personal guilt. Conduct mandatory no-blame team debriefs within 7 days of major events to reinforce pause-and-ask protocols.
-          </p>
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/80 text-xs text-purple-300">
-            <span class="font-bold">Human Stack Duty:</span> Protect staff emotional well-being to maintain operational resilience.
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 5: CURATED RESEARCH & DEEP-DIVE LINKS -->
-    <section id="sec-research" class="tab-content hidden space-y-6">
-      <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
-        <div class="p-2 rounded-lg bg-amber-500/20 text-amber-400">
-          <i class="fa-solid fa-book-bookmark text-lg"></i>
-        </div>
-        <div>
-          <h2 class="font-heading text-xl font-bold text-white">5. Curated Research & Deep-Dive Links</h2>
-          <p class="text-xs text-slate-400">Primary intelligence sources, regulatory enforcement releases, and vendor analyses</p>
-        </div>
-      </div>
-
-      <!-- RESEARCH TABLE CONTAINER -->
-      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs text-slate-300">
-            <thead class="bg-slate-950 text-slate-400 uppercase font-mono text-[11px] border-b border-slate-800">
-              <tr>
-                <th class="p-4">Document / Headline</th>
-                <th class="p-4">Source / Date</th>
-                <th class="p-4">Operational Relevance</th>
-                <th class="p-4 text-right">Access Source</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-800/60">
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">Binance $6.36B Exploit Analytics Breakdown</td>
-                <td class="p-4 text-slate-400">TRM Labs / Clash Report (Oct 30, 2026)</td>
-                <td class="p-4 text-slate-300">Details signing infrastructure compromise, 50 pre-signed authorizations, and issuer freeze mechanics.</td>
-                <td class="p-4 text-right">
-                  <a href="https://www.trmlabs.com/blog" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">OFAC DPRK IT Worker Sanctions Designation</td>
-                <td class="p-4 text-slate-400">U.S. Treasury / Chainalysis (Oct 28, 2026)</td>
-                <td class="p-4 text-slate-300">Maps front company names (Alis, FFTDC) and stablecoin payroll flows for monitoring rules.</td>
-                <td class="p-4 text-right">
-                  <a href="https://home.treasury.gov/policy-issues/financial-sanctions/recent-actions" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">SDNY $100M+ Romance/BEC Guilty Pleas</td>
-                <td class="p-4 text-slate-400">DOJ SDNY / GhanaWeb (Oct 29, 2026)</td>
-                <td class="p-4 text-slate-300">Exposes victim-mule manipulation structures and international wire laundering corridors.</td>
-                <td class="p-4 text-right">
-                  <a href="https://www.justice.gov/usao-sdny/pr" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">CTA Exemption Final Rule & State Lawsuit</td>
-                <td class="p-4 text-slate-400">InvestmentNews (Oct 2026)</td>
-                <td class="p-4 text-slate-300">Timeline of beneficial ownership rule deletion and 21-state federal lawsuit in Oregon.</td>
-                <td class="p-4 text-right">
-                  <a href="https://www.fincen.gov/news/news-releases" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">Interagency SAR Confidentiality Statement</td>
-                <td class="p-4 text-slate-400">Fed, FDIC, NCUA, OCC, FinCEN (Sept 2, 2026)</td>
-                <td class="p-4 text-slate-300">Definitive guidance on permissible customer communications during fraud closures.</td>
-                <td class="p-4 text-right">
-                  <a href="https://www.fincen.gov/news/news-releases" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">FinCEN Digital Asset Investment Scam Alert</td>
-                <td class="p-4 text-slate-400">FinCEN Alert FIN-2026-Alert005 (Sept 3, 2026)</td>
-                <td class="p-4 text-slate-300">Red flag checklist for romance and investment scam flows feeding mule networks.</td>
-                <td class="p-4 text-right">
-                  <a href="https://www.fincen.gov/resources/advisories-bulletins-fact-sheets" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="p-4 font-bold text-slate-100">Synthetic Identities $2.4B Exposure Report</td>
-                <td class="p-4 text-slate-400">Help Net Security / TransUnion (Oct 26, 2026)</td>
-                <td class="p-4 text-slate-300">Highlights 81% digital fraud occurring at login/transaction stages and auto lending risks.</td>
-                <td class="p-4 text-right">
-                  <a href="https://www.helpnetsecurity.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-terracotta/20 text-terracotta hover:bg-terracotta hover:text-white transition font-semibold inline-flex items-center gap-1">
-                    Link <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 6: COVERAGE NOTES & DISCLAIMER -->
-    <section id="sec-disclaimer" class="tab-content hidden space-y-6">
-      <div class="flex items-center space-x-3 border-b border-slate-800 pb-3">
-        <div class="p-2 rounded-lg bg-slate-700/30 text-slate-400">
-          <i class="fa-solid fa-clipboard-list text-lg"></i>
-        </div>
-        <div>
-          <h2 class="font-heading text-xl font-bold text-white">6. Coverage Scope, Gaps & Disclaimer</h2>
-          <p class="text-xs text-slate-400">Methodological notes, reviewed sources, and legal boundaries</p>
-        </div>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 text-xs text-slate-300 leading-relaxed">
-        <div>
-          <h3 class="font-bold text-white text-sm mb-1">Government & Regulatory Sources Reviewed</h3>
-          <p class="text-slate-400">FinCEN news releases, U.S. Treasury OFAC actions, DOJ SDNY announcements, FTC press releases, FBI/IC3 PSAs, CFPB, OCC, NCUA, and SEC public dockets.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white text-sm mb-1">Analytical Coverage Thin Spots</h3>
-          <p class="text-slate-400">Check and ACH fraud lacked dated primary government reports in this window. Reg E guidance produced no new items. Binance theft attribution rests on private blockchain analytics firms (TRM Labs, Chainalysis, Elliptic) without official U.S. government confirmation.</p>
-        </div>
-
-        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 italic">
-          <span class="font-bold text-terracotta not-italic block mb-1">Legal Disclaimer</span>
-          This intelligence briefing is compiled for professional peer intelligence and educational use within SHIELD: The 314 Collective. It does not constitute formal legal, regulatory, compliance, or financial advice.
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- INTERACTIVE ARCHIVE MODAL / DRAWER -->
-  <div id="archiveModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 sm:p-6 no-print">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
-      
-      <!-- MODAL HEADER -->
-      <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950">
-        <div class="flex items-center space-x-3">
-          <div class="p-2 rounded-lg bg-amber-500/20 text-amber-400">
-            <i class="fa-solid fa-box-archive text-lg"></i>
-          </div>
-          <div>
-            <h3 class="font-heading font-bold text-lg text-white">SHIELD Intelligence Archive</h3>
-            <p class="text-xs text-slate-400">Access historical weekly intelligence dossiers and primary briefing files</p>
-          </div>
-        </div>
-        <button onclick="toggleArchiveModal()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <!-- MODAL BODY -->
-      <div class="p-6 overflow-y-auto space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          <!-- ARCHIVED DROP 1 (CURRENT) -->
-          <div class="p-4 rounded-xl bg-slate-950 border border-emerald-500/30 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">CURRENT ISSUE</span>
-                <span class="text-xs text-slate-500">Oct 30, 2026</span>
-              </div>
-              <h4 class="font-bold text-white text-sm mb-1">Oct 25 – Oct 30, 2026 Briefing</h4>
-              <p class="text-xs text-slate-400 mb-3">Binance $6.3B exploit, OFAC DPRK sanctions, SDNY BEC guilty pleas & CTA lawsuits.</p>
-            </div>
-            <div class="flex items-center space-x-2 pt-2 border-t border-slate-800/80">
-              <span class="text-[11px] text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i> Active View</span>
-              <a href="https://raw.githubusercontent.com/SHIELD314-TheCollective/shield-intelligence-dossier/main/SHIELD_Weekly_Briefing_2026-10-30.docx" target="_blank" class="ml-auto text-xs text-terracotta hover:underline font-semibold flex items-center gap-1">
-                Download .docx <i class="fa-solid fa-download text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- ARCHIVED DROP 2 -->
-          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400">ARCHIVED</span>
-                <span class="text-xs text-slate-500">Oct 25, 2026</span>
-              </div>
-              <h4 class="font-bold text-white text-sm mb-1">Oct 17 – Oct 24, 2026 Briefing</h4>
-              <p class="text-xs text-slate-400 mb-3">$270M FinCEN student aid enforcement shift, SDNY deposit fraud, BioCatch mule trends.</p>
-            </div>
-            <div class="flex items-center space-x-2 pt-2 border-t border-slate-800/80">
-              <a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2FSHIELD314-TheCollective%2Fshield-intelligence-dossier%2Fmain%2Farchive%2FSHIELD_Weekly_Briefing_2026-10-25.docx" target="_blank" class="text-xs text-amber-400 hover:underline font-semibold flex items-center gap-1">
-                View Report <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-              <a href="https://raw.githubusercontent.com/SHIELD314-TheCollective/shield-intelligence-dossier/main/archive/SHIELD_Weekly_Briefing_2026-10-25.docx" target="_blank" class="ml-auto text-xs text-terracotta hover:underline font-semibold flex items-center gap-1">
-                Download .docx <i class="fa-solid fa-download text-[10px]"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- MODAL FOOTER -->
-      <div class="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500">
-        <span>Files hosted on official GitHub repository</span>
-        <button onclick="toggleArchiveModal()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-200 font-semibold hover:bg-slate-700 transition">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="no-print mt-auto border-t border-slate-800/80 bg-[#0B0F19] py-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-      <div class="flex items-center space-x-2">
-        <span class="font-bold text-slate-300">SHIELD: The 314 Collective</span>
-        <span>•</span>
-        <span>Architect of Human-Centered Risk Management</span>
-      </div>
-      <div>
-        <span>Weekly Briefing Oct 25–30, 2026</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- INTERACTIVE JAVASCRIPT LOGIC -->
-  <script>
-    // Tab Switching Logic
-    function switchTab(tabId) {
-      // Hide all contents
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('block'));
-      
-      // Reset button styles
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-terracotta', 'text-white', 'shadow-md');
-        btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
-      });
-
-      // Show selected content
-      const activeContent = document.getElementById('sec-' + tabId);
-      if (activeContent) {
-        activeContent.classList.remove('hidden');
-        activeContent.classList.add('block');
-      }
-
-      // Highlight active button
-      const activeBtn = document.getElementById('tab-' + tabId);
-      if (activeBtn) {
-        activeBtn.classList.add('bg-terracotta', 'text-white', 'shadow-md');
-        activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-slate-800');
-      }
-    }
-
-    // Accordion Toggle Logic
-    function toggleAccordion(id) {
-      const content = document.getElementById('content-' + id);
-      const icon = document.getElementById('icon-' + id);
-      
-      if (content.classList.contains('hidden')) {
-        content.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-      } else {
-        content.classList.add('hidden');
-        icon.classList.remove('rotate-180');
-      }
-    }
-
-    // Frontline Red Flags Filter Logic
-    function filterFlags() {
-      const input = document.getElementById('flagSearch').value.toLowerCase();
-      const cards = document.querySelectorAll('.flag-card');
-
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        if (text.includes(input)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    }
-
-    // Quick Copy Helper
-    function copyText(elementId) {
-      const textToCopy = document.getElementById(elementId).innerText;
-      const tempTextArea = document.createElement("textarea");
-      tempTextArea.value = textToCopy;
-      document.body.appendChild(tempTextArea);
-      tempTextArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(tempTextArea);
-      
-      // Show notification toast
-      const toast = document.createElement("div");
-      toast.className = "fixed bottom-6 right-6 bg-terracotta text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-2xl z-50 transition-all duration-300";
-      toast.innerText = "Copied to clipboard!";
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 2000);
-    }
-
-    // Toggle Archive Drawer / Modal
-    function toggleArchiveModal() {
-      const modal = document.getElementById('archiveModal');
-      if (modal.classList.contains('hidden')) {
-        modal.classList.remove('hidden');
-      } else {
-        modal.classList.add('hidden');
-      }
-    }
-  </script>
-</body>
-</html>
+    <!-- TL;DR Section -->
+    <section>
+        <h2>⚡ Weekly Signal TL;DR</h2>
+        <div class="tldr-grid">
+            <div class="card" data-category="crypto">
+                <div class="card-tag">Enforcement Shift • Sanctions</div>
+                <h3>OFAC Designates DPRK IT Workers & Enablers</h3>
+                <p>On Oct 28, OFAC sanctioned 10 people and 1 entity, marking the first time Russian nationals were designated for laundering DPRK IT worker earnings through crypto
