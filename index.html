@@ -282,7 +282,7 @@
         <div class="signal-block">
             <div class="signal-grid">
                 <div class="signal-label">Enforcement Shift</div>
-                <div class="signal-text">FinCEN Alert FIN-2026-Alert009 flags over $8B in suspicious foreign-agent-directed MSB settlement payments. OFAC followed on Nov 5 with 46 designations targeting the Prince Group scam network and offshore shell structures. Operational takeaway: Review MSB wire beneficiaries against red flags and tag SARs with FIN2026FOREIGNAGENT.</div>
+                <div class="signal-text">FinCEN Alert FIN-2026-Alert009 flags over $8B in suspicious foreign-agent-directed MSB settlement payments. OFAC followed on Nov 5 with 46 designations targeting the Prince Group scam network and offshore shell structures. Operational takeaway: Review MSB wire beneficiaries against red flags and tag SARs with <code>FIN2026FOREIGNAGENT</code>.</div>
             </div>
             <div class="signal-grid" style="margin-top: 1rem;">
                 <div class="signal-label">Operational Vector</div>
@@ -296,70 +296,80 @@
         <h2>🔍 2. Top Signals & Typology Breakdown</h2>
 
         <div class="signal-block">
-            <div class="signal-title">Signal 1 of 4: FinCEN foreign-agent alert: MSB settlement wires</div>
+            <div class="signal-title">Signal 1 of 4: FinCEN foreign-agent alert: MSB settlement wires that go to strangers</div>
             <div class="signal-grid">
                 <div class="signal-label">Core Domain</div>
                 <div class="signal-text">International wires; MSB banking; third-party payments; BSA reporting.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Mechanism</div>
-                <div class="signal-text">Foreign agents of U.S. principal MSBs instruct principals to wire settlement funds to unrelated third parties abroad (trading/export firms). Over $8B in suspicious activity identified (2021–2025).</div>
+                <div class="signal-text">Foreign agents of U.S. principal MSBs instruct principals to wire settlement funds to unrelated third parties abroad (trading/export firms) with vague purposes ($8B in suspicious activity identified, 2021–2025).</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Frontline Impact</div>
-                <div class="signal-text">Pull 12 months of outbound international wires for MSB accounts. Include narrative key term FIN2026FOREIGNAGENT on SAR filings.</div>
+                <div class="signal-text">Pull 12 months of outbound international wires for MSB accounts and sort by beneficiary. Include narrative key term <code>FIN2026FOREIGNAGENT</code> on SAR filings.</div>
+            </div>
+            <div class="source-box">
+                <strong>Source:</strong> FinCEN Alert FIN-2026-Alert009 (Oct 30, 2026); AML Intelligence Roundup
             </div>
         </div>
 
         <div class="signal-block">
-            <div class="signal-title">Signal 2 of 4: OFAC Prince Group network: shell companies & nominee directors</div>
+            <div class="signal-title">Signal 2 of 4: OFAC and the Prince Group network: shell companies & nominee directors</div>
             <div class="signal-grid">
                 <div class="signal-label">Core Domain</div>
                 <div class="signal-text">Sanctions; beneficial ownership; scam compound laundering; account opening.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Mechanism</div>
-                <div class="signal-text">OFAC designated 46 individuals and entities tied to scam compound networks utilizing BVI shelf companies, nominee directors, and asset transfers to family members to evade prior sanctions.</div>
+                <div class="signal-text">OFAC designated 4 individuals and 41 entities in the Prince Group network plus Chui Kok Wa (Madagascar-based scam network), utilizing BVI shelf companies, nominee directors, and asset transfers to family members.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Frontline Impact</div>
-                <div class="signal-text">Re-run SDN screening including the 50 Percent Rule. Review business accounts with BVI/Hong Kong parents and cross-directed entities.</div>
+                <div class="signal-text">Re-run customer and counterparty screening against the new list including the 50% rule. Review business accounts with BVI or Hong Kong parents and cross-directed entities.</div>
             </div>
             <div class="source-box">
                 <strong>Source:</strong> 
-                <a href="https://home.treasury.gov/news/press-releases/sb0683" target="_blank" class="source-link">U.S. Treasury Nov 5 Sanctions Release</a>
+                <a href="https://home.treasury.gov/news/press-releases/sb0683" target="_blank" class="source-link">U.S. Treasury Press Release (Nov 5, 2026)</a>
             </div>
         </div>
 
         <div class="signal-block">
-            <div class="signal-title">Signal 3 of 4: Binance theft laundering: automated, multi-chain conversion</div>
+            <div class="signal-title">Signal 3 of 4: Binance theft laundering: automated, multi-chain, and heading for OTC cash-out</div>
             <div class="signal-grid">
                 <div class="signal-label">Core Domain</div>
                 <div class="signal-text">Crypto off-ramps; stablecoin freezes; sanctions (DPRK); fiat conversion.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Mechanism</div>
-                <div class="signal-text">~$6.43B stolen by DPRK TraderTraitor group. Elliptic tracked 40,000+ transactions across 12,000 wallets. Stablecoin issuers froze $2.85B+, while remaining ETH/BTC is moving toward OTC cash-outs.</div>
+                <div class="signal-text">~$6.43B stolen from Binance (FBI attributed to TraderTraitor). Elliptic tracked 40,000+ transactions across 12,000 wallets. Stablecoin issuers froze $2.85B+ (~44%), while remaining ETH/BTC heads toward OTC cash-out.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Frontline Impact</div>
-                <div class="signal-text">Flag customers receiving large fiat credits from unfamiliar OTC brokers or exchanges. Warn victims against secondary "recovery service" scams.</div>
+                <div class="signal-text">Flag customers receiving large fiat credits from unfamiliar OTC brokers or exchanges. Warn scam victims against secondary "recovery service" telegram scams.</div>
+            </div>
+            <div class="source-box">
+                <strong>Source:</strong> 
+                <a href="https://decrypt.co" target="_blank" class="source-link">Decrypt / Elliptic Analysis (Nov 2, 2026)</a> | The Cryptonomist (Nov 6, 2026)
             </div>
         </div>
 
         <div class="signal-block">
-            <div class="signal-title">Signal 4 of 4: Operation Ghostbusters: ghost and straw student refund schemes</div>
+            <div class="signal-title">Signal 4 of 4: Operation Ghostbusters: ghost and straw students, and refund accounts</div>
             <div class="signal-grid">
                 <div class="signal-label">Core Domain</div>
                 <div class="signal-text">Synthetic/stolen identity; new deposit accounts; refund routing; mule accounts.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Mechanism</div>
-                <div class="signal-text">DOJ target network utilizing stolen identities, AI applications, and straw students to fraudulently obtain federal student financial aid, routing refunds to newly opened accounts.</div>
+                <div class="signal-text">DOJ Operation Ghostbusters targets "ghost student" fraud (stolen data + AI for federal aid) and "straw student" schemes, routing refunds through controlled accounts and shell intermediaries.</div>
             </div>
             <div class="signal-grid">
                 <div class="signal-label">Frontline Impact</div>
-                <div class="signal-text">Set monitoring rules for student refund credits hitting accounts under 60 days old. Compare applicant IDs against listed school locations.</div>
+                <div class="signal-text">Set monitoring rules for student refund credits hitting accounts under 60 days old. Compare applicant IDs and school locations.</div>
+            </div>
+            <div class="source-box">
+                <strong>Source:</strong> American Thinker (Nov 4, 2026 summary of DOJ Oct 29 announcement)
             </div>
         </div>
     </section>
@@ -377,11 +387,11 @@
             <tbody>
                 <tr>
                     <td><strong>Branch / Teller Line</strong></td>
-                    <td>Students/parents opening accounts for "refunds" unable to name the school; inquiries about recovery services for prior crypto losses.</td>
+                    <td>Students/parents opening accounts for "school refunds" unable to name the school; inquiries about recovery services for prior crypto losses; older customer on open phone call during wire.</td>
                 </tr>
                 <tr>
                     <td><strong>New Accounts</strong></td>
-                    <td>Offshore parent companies with nominee directors; MSBs with unexplained third-party international settlement wire destinations.</td>
+                    <td>Business applicants with BVI or Hong Kong parent, "lending/trading/wine" in title, and directors who are relatives or sit on unrelated entities; MSBs with unexplained third-party international settlement wires.</td>
                 </tr>
                 <tr>
                     <td><strong>Deposit Ops / Wire</strong></td>
@@ -389,7 +399,7 @@
                 </tr>
                 <tr>
                     <td><strong>Dispute / Reg E Intake</strong></td>
-                    <td>Record initial contact vector (ad, call, text, fake site) and remote tool usage. Beware fake FBI/FTC recovery fee scams.</td>
+                    <td>Record initial contact vector (ad, call, text, fake site), remote access software installation, and who gave instructions. Beware fake FBI/FTC recovery fee scams.</td>
                 </tr>
             </tbody>
         </table>
